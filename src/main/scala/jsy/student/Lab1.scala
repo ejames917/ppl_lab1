@@ -8,9 +8,9 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
 
   /*
    * CSCI 3155: Lab 1
-   * Evan James
+   * <Carly Romig>
    *
-   * Partner: Carly Romig
+   * Partner: <Evan James>
    * Collaborators: <Any Collaborators>
    */
 
@@ -55,34 +55,40 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
 
   /* Exercises */
 
-  def abs(n: Double): Double = if(n>0) n else -n
+  def abs(n: Double): Double = if (n<0) -n else n
 
   def xor(a: Boolean, b: Boolean): Boolean = {
-    if(a && !b) true
-    else if(b && !a) true
-    else false
-  }
+    if ((a == true) & (b == false)) true
+    else if ((b == true) & (a == false)) true
+    else false}
 
   def repeat(s: String, n: Int): String = {
-  require(n>=0)
-  if(n==0) ""
-  else if(n==1) s
-  else s.concat(repeat(s, n-1))
-}
+    require(n >= 0)
+    if (n == 0) ""
+    else if (n == 1) s
+    else s.concat(repeat(s, n - 1))
+  }
+    //while (n > 0) {
+      //var st = s + s;
+      //val n = n - 1;
+      //println(st);
+    //}
+  //}
 
-  def sqrtStep(c: Double, xn: Double): Double = xn - ((xn*xn-c)/(2*xn))
+
+  def sqrtStep(c: Double, xn: Double): Double = return (xn - ((xn*xn) - c)/(2*xn))
 
   def sqrtN(c: Double, x0: Double, n: Int): Double = {
     require(n >= 0)
-    if(n==0) x0
-    else {
-      val xn = sqrtStep(c, x0)
-      sqrtN(c, xn, n-1)
+    if (n == 0)x0
+    else{
+      var xy = sqrtStep(c, x0)
+      sqrtN(c, xy, n-1)
     }
   }
 
   def sqrtErr(c: Double, x0: Double, epsilon: Double): Double = {
-    require(c>=0 & epsilon > 0)
+    require(c >= 0 & epsilon > 0)
     if(abs(x0*x0-c)<epsilon) x0
     else sqrtErr(c, sqrtStep(c, x0), epsilon)
   }
@@ -103,17 +109,20 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
   def repOk(t: SearchTree): Boolean = {
     def check(t: SearchTree, min: Int, max: Int): Boolean = t match {
       case Empty => true
-      case Node(l, d, r) => if((min<=d) && (d<max)) check(l,min,d) && check(r,d,max) else false
+      case Node(l, d, r) => if ((min <= d) && (d < max)) (check(l,min,d) && check(r,d,max)) else false
     }
     check(t, Int.MinValue, Int.MaxValue)
   }
 
-  def insert(t: SearchTree, n: Int): SearchTree = t match {
-    case Empty => Node(Empty, n, Empty)
-    case Node(l,d,r) => if(n<d) {
-      Node(insert(l,n), d, r)
-    } else {
-      Node(l, d, insert(r,n))
+  def insert(t: SearchTree, n: Int): SearchTree = {
+    t match{
+      case Empty => Node(Empty, n, Empty) //inserting first node into tree
+      case Node(l, d, r) => if (n < d){    //if node is less than root
+        Node(insert(l, n), d, r)         //return left subtree with n
+      }
+      else{
+        Node(l, d, insert(r,n))         //return right subtree with n
+      }
     }
   }
 
@@ -127,12 +136,25 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
     }
   }
 
-  def delete(t: SearchTree, n: Int): SearchTree = ???
+  def delete(t: SearchTree, n: Int): SearchTree = t match {
+    case Empty => Empty
+    case Node(l,d,r) => {
+      if (n<d) Node(delete(l, n), d, r)
+      else if (n>d) Node(l, d, delete(r, n))
+      else{
+        if(r!=Empty) {
+          val(r1,d1) = deleteMin(r)
+          Node(l, d1, r1)
+        }
+        else l
+        }
+      }
+  }
 
   /* JavaScripty */
 
   def eval(e: Expr): Double = e match {
-    case N(n) => n
+    case N(n) => ???
     case _ => ???
   }
 
