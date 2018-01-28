@@ -1,1 +1,1 @@
-##Lab 1 Writeup-Evan James and Carly Romig
+## Lab 1 Writeup-Evan James and Carly Romig
