@@ -154,8 +154,12 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
   /* JavaScripty */
 
   def eval(e: Expr): Double = e match {
-    case N(n) => ???
-    case _ => ???
+    case N(n) => n
+    case Unary(Neg, e)=> -eval(e)
+    case Binary(Plus, e1, e2)=> eval(e1) + eval(e2)
+    case Binary(Minus, e1, e2)=> eval(e1) - eval(e2)
+    case Binary(Times, e1, e2)=> eval(e1)*eval(e2)
+    case Binary(Div, e1, e2)=> eval(e1)/eval(e2)
   }
 
  // Interface to run your interpreter from a string.  This is convenient
