@@ -5,6 +5,8 @@
 ### (a) Consider the following Scala code.
 ![alt text](https://github.com/ejames917/ppl_lab1/blob/master/images/p1.png)
 The use of pi at line 4 is bound at which line? 
+
+
 The use of pi at line 7 is bound at which line?
 
 ### (b) Consider the following Scala code.
