@@ -8,10 +8,10 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
 
   /*
    * CSCI 3155: Lab 1
-   * <Carly Romig>
+   * <Evan James>
    *
-   * Partner: <Evan James>
-   * Collaborators: <Any Collaborators>
+   * Partner: <Carly Romig>
+   * Collaborators: <Nate Ewan>
    */
 
   /*
@@ -159,7 +159,13 @@ object Lab1 extends jsy.util.JsyApplication with jsy.lab1.Lab1Like {
     case Binary(Plus, e1, e2)=> eval(e1) + eval(e2)
     case Binary(Minus, e1, e2)=> eval(e1) - eval(e2)
     case Binary(Times, e1, e2)=> eval(e1)*eval(e2)
-    case Binary(Div, e1, e2)=> eval(e1)/eval(e2)
+    case Binary(Div, e1, e2)=> {
+      if (eval(e2) == 0) {
+        if (eval(e1) > 0) Double.PositiveInfinity
+        else if(eval(e1) < 0) Double.NegativeInfinity
+        else Double.NaN
+      } else eval(e1)/eval(e2)
+    }
   }
 
  // Interface to run your interpreter from a string.  This is convenient
